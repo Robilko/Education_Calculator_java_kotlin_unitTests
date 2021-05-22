@@ -35,7 +35,7 @@
             android:fontFamily="@font/aclonica"
             android:textStyle="italic"
             android:textColor="@color/blue_gray_700"
-            android:text="2+7-3567+54668763473855" />
+            android:text="2+5" />
 
         <TextView
             android:id="@+id/result"
@@ -47,7 +47,7 @@
             android:textAlignment="textEnd"
             android:fontFamily="@font/aclonica"
             android:textColor="@color/blue_gray_700"
-            android:text="34678.00" />
+            android:text="7.0" />
     </LinearLayout>
 
     <TableLayout
