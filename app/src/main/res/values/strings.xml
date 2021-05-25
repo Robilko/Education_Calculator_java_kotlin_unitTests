@@ -12,7 +12,7 @@
     <string name="zero">0</string>
     <string name="double_zero">00</string>
 
-    <string name="clear">C</string>
+    <string name="clear">AC</string>
     <string name="plus_minus">±</string>
     <string name="percent">%</string>
     <string name="dot">.</string>
@@ -21,7 +21,6 @@
     <string name="division">÷</string>
     <string name="multiply">×</string>
     <string name="equals">=</string>
-    <string name="backspace"></string>
 
     <string name="zero_value">0</string>
 
