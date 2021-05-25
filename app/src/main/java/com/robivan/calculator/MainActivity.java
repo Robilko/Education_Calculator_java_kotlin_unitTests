@@ -4,11 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewAnimator;
 
 public class MainActivity extends AppCompatActivity {
     private CalculatorModel calculator;
@@ -46,29 +42,29 @@ public class MainActivity extends AppCompatActivity {
                 R.id.clear
         };
 
+        initResultScreen();
+
         calculator = new CalculatorModel();
 
         View.OnClickListener numberButtonClickListener = v -> {
             calculator.onNumPressed(v.getId());
-            display.setText(calculator.getHistory());
-            resultScreen.setText(calculator.getValue());
+            display.setText(calculator.getExpressionValue());
+            resultScreen.setText(calculator.getResultValue());
         };
 
         View.OnClickListener actionButtonClickListener = v -> {
             calculator.onActionPressed(v.getId());
-            display.setText(calculator.getHistory());
-            resultScreen.setText(calculator.getValue());
+            display.setText(calculator.getExpressionValue());
+            resultScreen.setText(calculator.getResultValue());
         };
 
-        for (int i = 0; i < numberIds.length; i++) {
-            findViewById(numberIds[i]).setOnClickListener(numberButtonClickListener);
+        for (int numberId : numberIds) {
+            findViewById(numberId).setOnClickListener(numberButtonClickListener);
         }
 
-        for (int i = 0; i < actionIds.length; i++) {
-            findViewById(actionIds[i]).setOnClickListener(actionButtonClickListener);
+        for (int actionId : actionIds) {
+            findViewById(actionId).setOnClickListener(actionButtonClickListener);
         }
-
-        initResultScreen();
 
     }
     private void initResultScreen() {
