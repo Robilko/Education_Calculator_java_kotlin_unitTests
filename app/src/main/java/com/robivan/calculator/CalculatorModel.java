@@ -116,6 +116,9 @@ public class CalculatorModel {
         }
 
         if (actionId == ActionButton.EQUALS) {
+            if (ARGUMENT.length() == 0) {
+                return;
+            }
             if (state == State.firstArgInput){
                 firstArg = Double.parseDouble(ARGUMENT.toString());
                 state = State.secondArgInput;
@@ -151,6 +154,9 @@ public class CalculatorModel {
             }
 
         } else {
+            if (ARGUMENT.length() == 0) {
+                return;
+            }
             if (state == State.firstArgInput){
                 firstArg = Double.parseDouble(ARGUMENT.toString());
                 state = State.secondArgInput;
