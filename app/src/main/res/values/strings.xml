@@ -22,6 +22,6 @@
     <string name="multiply">×</string>
     <string name="equals">=</string>
 
-    <string name="zero_value">0</string>
+    <string name="start_value">0.0</string>
 
 </resources>
