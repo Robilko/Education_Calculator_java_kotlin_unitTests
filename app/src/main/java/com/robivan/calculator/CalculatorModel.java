@@ -1,5 +1,7 @@
 package com.robivan.calculator;
 
+import java.text.DecimalFormat;
+
 public class CalculatorModel {
     private double firstArg;
     private boolean hasDot = false;
@@ -90,28 +92,27 @@ public class CalculatorModel {
         }
 
         if (actionId == ActionButton.PLUS_MINUS) {
-            if (ARGUMENT.length() == 0) {
-                return;
+            if (ARGUMENT.length() != 0) {
+                double tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
+                ARGUMENT.setLength(0);
+                ARGUMENT.append(tmp);
             }
-            double tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
-            ARGUMENT.setLength(0);
-            ARGUMENT.append(tmp);
             return;
         }
 
         if (actionId == ActionButton.BACKSPACE) {
-            if (ARGUMENT.length() == 0) {
-                return;
+            if (ARGUMENT.length() != 0) {
+                ARGUMENT.deleteCharAt(ARGUMENT.length() - 1);
             }
-            ARGUMENT.deleteCharAt(ARGUMENT.length() - 1);
             return;
         }
 
-        if (actionId == ActionButton.PERCENT && ARGUMENT.length() != 0) {
-            double tmp = Double.parseDouble(ARGUMENT.toString()) / (double)100;
-            ARGUMENT.setLength(0);
-            ARGUMENT.append(tmp);
-
+        if (actionId == ActionButton.PERCENT) {
+            if (ARGUMENT.length() != 0) {
+                double tmp = Double.parseDouble(ARGUMENT.toString()) / (double) 100;
+                ARGUMENT.setLength(0);
+                ARGUMENT.append(tmp);
+            }
             return;
         }
 
@@ -119,7 +120,7 @@ public class CalculatorModel {
             if (ARGUMENT.length() == 0) {
                 return;
             }
-            if (state == State.firstArgInput){
+            if (state == State.firstArgInput) {
                 firstArg = Double.parseDouble(ARGUMENT.toString());
                 state = State.secondArgInput;
                 actionSelected = ActionButton.EQUALS;
@@ -154,10 +155,7 @@ public class CalculatorModel {
             }
 
         } else {
-            if (ARGUMENT.length() == 0) {
-                return;
-            }
-            if (state == State.firstArgInput){
+            if (state == State.firstArgInput) {
                 firstArg = Double.parseDouble(ARGUMENT.toString());
                 state = State.secondArgInput;
                 EXPRESSION.append(ARGUMENT);
@@ -190,7 +188,6 @@ public class CalculatorModel {
                     EXPRESSION.append("÷");
                     break;
             }
-
         }
 
     }
@@ -202,4 +199,5 @@ public class CalculatorModel {
     public String getExpressionValue() {
         return EXPRESSION.toString();
     }
+
 }
