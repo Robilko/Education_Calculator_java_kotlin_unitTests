@@ -1,10 +1,10 @@
 package com.robivan.calculator;
 
-import java.text.DecimalFormat;
 
 public class CalculatorModel {
     private double firstArg;
     private boolean hasDot = false;
+    private final int ARG_MAX_LENGTH = 20;
 
     private final StringBuilder ARGUMENT = new StringBuilder();
     private final StringBuilder EXPRESSION = new StringBuilder();
@@ -30,18 +30,11 @@ public class CalculatorModel {
             state = State.firstArgInput;
         }
 
-        if (ARGUMENT.length() < 10) {
+        if (ARGUMENT.length() < ARG_MAX_LENGTH) {
+            if (ARGUMENT.length() == 1 && ARGUMENT.charAt(0) == '0') {
+                ARGUMENT.setLength(0);
+            }
             switch (buttonId) {
-                case NumberButton.ZERO:
-                    if (ARGUMENT.length() != 0) {
-                        ARGUMENT.append("0");
-                    }
-                    break;
-                case NumberButton.DOUBLE_ZERO:
-                    if (ARGUMENT.length() != 0) {
-                        ARGUMENT.append("00");
-                    }
-                    break;
                 case NumberButton.ONE:
                     ARGUMENT.append("1");
                     break;
@@ -69,57 +62,67 @@ public class CalculatorModel {
                 case NumberButton.NINE:
                     ARGUMENT.append("9");
                     break;
+                case NumberButton.ZERO:
+                    ARGUMENT.append("0");
+                    break;
+                case NumberButton.DOUBLE_ZERO:
+                    if (ARGUMENT.length() == 0) {
+                        ARGUMENT.append("0");
+                    } else {
+                        ARGUMENT.append("00");
+                    }
+                    break;
                 case NumberButton.DOT:
-                    if (ARGUMENT.length() != 0 && !hasDot) {
+                    if (ARGUMENT.length() == 0) {
+                        ARGUMENT.append("0.");
+                        hasDot = true;
+                    } else if (!hasDot) {
                         ARGUMENT.append(".");
                         hasDot = true;
                     }
                     break;
+                }
             }
-        }
 
     }
 
     public void onActionPressed(int actionId) {
         hasDot = false;
+        if (ARGUMENT.length() == 0) {
+            ARGUMENT.append("0");
+        }
 
         if (actionId == ActionButton.CLEAR) {
             ARGUMENT.setLength(0);
             EXPRESSION.setLength(0);
             state = State.resultShow;
-            ARGUMENT.append("0.0");
+            ARGUMENT.append("0");
             return;
         }
 
         if (actionId == ActionButton.PLUS_MINUS) {
-            if (ARGUMENT.length() != 0) {
-                double tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
-                ARGUMENT.setLength(0);
-                ARGUMENT.append(tmp);
-            }
+            double tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
+            ARGUMENT.setLength(0);
+            ARGUMENT.append(doublePrimeToInt(tmp));
             return;
         }
 
         if (actionId == ActionButton.BACKSPACE) {
-            if (ARGUMENT.length() != 0) {
-                ARGUMENT.deleteCharAt(ARGUMENT.length() - 1);
+            ARGUMENT.deleteCharAt(ARGUMENT.length() - 1);
+            if (ARGUMENT.length() == 0) {
+                ARGUMENT.append("0");
             }
             return;
         }
 
         if (actionId == ActionButton.PERCENT) {
-            if (ARGUMENT.length() != 0) {
-                double tmp = Double.parseDouble(ARGUMENT.toString()) / (double) 100;
-                ARGUMENT.setLength(0);
-                ARGUMENT.append(tmp);
-            }
+            double tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
+            ARGUMENT.setLength(0);
+            ARGUMENT.append(doublePrimeToInt(tmp));
             return;
         }
 
         if (actionId == ActionButton.EQUALS) {
-            if (ARGUMENT.length() == 0) {
-                return;
-            }
             if (state == State.firstArgInput) {
                 firstArg = Double.parseDouble(ARGUMENT.toString());
                 state = State.secondArgInput;
@@ -133,23 +136,23 @@ public class CalculatorModel {
                 ARGUMENT.setLength(0);
                 switch (actionSelected) {
                     case ActionButton.PLUS:
-                        ARGUMENT.append(firstArg + secondArg);
+                        ARGUMENT.append(doublePrimeToInt(firstArg + secondArg));
                         break;
                     case ActionButton.MINUS:
-                        ARGUMENT.append(firstArg - secondArg);
+                        ARGUMENT.append(doublePrimeToInt(firstArg - secondArg));
                         break;
                     case ActionButton.MULTIPLY:
-                        ARGUMENT.append(firstArg * secondArg);
+                        ARGUMENT.append(doublePrimeToInt(firstArg * secondArg));
                         break;
                     case ActionButton.DIVISION:
                         if (firstArg == 0 || secondArg == 0) {
                             ARGUMENT.append(0);
                         } else {
-                            ARGUMENT.append(firstArg / secondArg);
+                            ARGUMENT.append(doublePrimeToInt(firstArg / secondArg));
                         }
                         break;
                     case ActionButton.EQUALS:
-                        ARGUMENT.append(firstArg);
+                        ARGUMENT.append(doublePrimeToInt(firstArg));
                         break;
                 }
             }
@@ -160,6 +163,7 @@ public class CalculatorModel {
                 state = State.secondArgInput;
                 EXPRESSION.append(ARGUMENT);
                 ARGUMENT.setLength(0);
+                ARGUMENT.append(0);
             } else if (state == State.secondArgInput) {
                 EXPRESSION.deleteCharAt(EXPRESSION.length() - 1);
             } else if (state == State.resultShow) {
@@ -198,6 +202,15 @@ public class CalculatorModel {
 
     public String getExpressionValue() {
         return EXPRESSION.toString();
+    }
+
+    private String doublePrimeToInt(double number) {
+        String result = "";
+        if (number % 1 == 0)
+            result +=(int)number;
+        else
+            result +=number;
+        return result;
     }
 
 }

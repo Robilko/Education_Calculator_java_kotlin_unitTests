@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
-
-
 public class MainActivity extends AppCompatActivity {
     private CalculatorModel calculator;
     private TextView display, resultScreen;
