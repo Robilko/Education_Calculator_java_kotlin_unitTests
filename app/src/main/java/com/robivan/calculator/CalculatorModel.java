@@ -81,117 +81,117 @@ public class CalculatorModel {
                         hasDot = true;
                     }
                     break;
-                }
             }
+        }
 
     }
 
     public void onActionPressed(int actionId) {
         hasDot = false;
+        double tmp = 0;
         if (ARGUMENT.length() == 0) {
             ARGUMENT.append("0");
         }
 
-        if (actionId == ActionButton.CLEAR) {
-            ARGUMENT.setLength(0);
-            EXPRESSION.setLength(0);
-            state = State.resultShow;
-            ARGUMENT.append("0");
-            return;
-        }
-
-        if (actionId == ActionButton.PLUS_MINUS) {
-            double tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
-            ARGUMENT.setLength(0);
-            ARGUMENT.append(doublePrimeToInt(tmp));
-            return;
-        }
-
-        if (actionId == ActionButton.BACKSPACE) {
-            ARGUMENT.deleteCharAt(ARGUMENT.length() - 1);
-            if (ARGUMENT.length() == 0) {
-                ARGUMENT.append("0");
-            }
-            return;
-        }
-
-        if (actionId == ActionButton.PERCENT) {
-            double tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
-            ARGUMENT.setLength(0);
-            ARGUMENT.append(doublePrimeToInt(tmp));
-            return;
-        }
-
-        if (actionId == ActionButton.EQUALS) {
-            if (state == State.firstArgInput) {
-                firstArg = Double.parseDouble(ARGUMENT.toString());
-                state = State.secondArgInput;
-                actionSelected = ActionButton.EQUALS;
-            }
-            if (state == State.secondArgInput) {
-                double secondArg = Double.parseDouble(ARGUMENT.toString());
-                state = State.resultShow;
-                EXPRESSION.append(ARGUMENT);
-                EXPRESSION.append("=");
+        switch (actionId) {
+            case ActionButton.CLEAR:
                 ARGUMENT.setLength(0);
-                switch (actionSelected) {
-                    case ActionButton.PLUS:
-                        ARGUMENT.append(doublePrimeToInt(firstArg + secondArg));
-                        break;
-                    case ActionButton.MINUS:
-                        ARGUMENT.append(doublePrimeToInt(firstArg - secondArg));
-                        break;
-                    case ActionButton.MULTIPLY:
-                        ARGUMENT.append(doublePrimeToInt(firstArg * secondArg));
-                        break;
-                    case ActionButton.DIVISION:
-                        if (firstArg == 0 || secondArg == 0) {
-                            ARGUMENT.append(0);
-                        } else {
-                            ARGUMENT.append(doublePrimeToInt(firstArg / secondArg));
-                        }
-                        break;
-                    case ActionButton.EQUALS:
-                        ARGUMENT.append(doublePrimeToInt(firstArg));
-                        break;
-                }
-            }
-
-        } else {
-            if (state == State.firstArgInput) {
-                firstArg = Double.parseDouble(ARGUMENT.toString());
-                state = State.secondArgInput;
-                EXPRESSION.append(ARGUMENT);
-                ARGUMENT.setLength(0);
-                ARGUMENT.append(0);
-            } else if (state == State.secondArgInput) {
-                EXPRESSION.deleteCharAt(EXPRESSION.length() - 1);
-            } else if (state == State.resultShow) {
-                firstArg = Double.parseDouble(ARGUMENT.toString());
-                state = State.secondArgInput;
                 EXPRESSION.setLength(0);
-                EXPRESSION.append(ARGUMENT);
-                ARGUMENT.setLength(0);
-            }
+                state = State.resultShow;
+                ARGUMENT.append("0");
+                break;
 
-            switch (actionId) {
-                case ActionButton.PLUS:
-                    actionSelected = ActionButton.PLUS;
-                    EXPRESSION.append("+");
-                    break;
-                case ActionButton.MINUS:
-                    actionSelected = ActionButton.MINUS;
-                    EXPRESSION.append("-");
-                    break;
-                case ActionButton.MULTIPLY:
-                    actionSelected = ActionButton.MULTIPLY;
-                    EXPRESSION.append("×");
-                    break;
-                case ActionButton.DIVISION:
-                    actionSelected = ActionButton.DIVISION;
-                    EXPRESSION.append("÷");
-                    break;
-            }
+            case ActionButton.PLUS_MINUS:
+                tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
+                ARGUMENT.setLength(0);
+                ARGUMENT.append(doublePrimeToInt(tmp));
+                break;
+
+            case ActionButton.BACKSPACE:
+                ARGUMENT.deleteCharAt(ARGUMENT.length() - 1);
+                if (ARGUMENT.length() == 0) {
+                    ARGUMENT.append("0");
+                }
+                break;
+
+            case  ActionButton.PERCENT:
+                tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
+                ARGUMENT.setLength(0);
+                ARGUMENT.append(doublePrimeToInt(tmp));
+                break;
+
+            case ActionButton.EQUALS:
+                if (state == State.firstArgInput) {
+                    firstArg = Double.parseDouble(ARGUMENT.toString());
+                    state = State.secondArgInput;
+                    actionSelected = ActionButton.EQUALS;
+                }
+                if (state == State.secondArgInput) {
+                    double secondArg = Double.parseDouble(ARGUMENT.toString());
+                    state = State.resultShow;
+                    EXPRESSION.append(ARGUMENT);
+                    EXPRESSION.append("=");
+                    ARGUMENT.setLength(0);
+                    switch (actionSelected) {
+                        case ActionButton.PLUS:
+                            ARGUMENT.append(doublePrimeToInt(firstArg + secondArg));
+                            break;
+                        case ActionButton.MINUS:
+                            ARGUMENT.append(doublePrimeToInt(firstArg - secondArg));
+                            break;
+                        case ActionButton.MULTIPLY:
+                            ARGUMENT.append(doublePrimeToInt(firstArg * secondArg));
+                            break;
+                        case ActionButton.DIVISION:
+                            if (firstArg == 0 || secondArg == 0) {
+                                ARGUMENT.append(0);
+                            } else {
+                                ARGUMENT.append(doublePrimeToInt(firstArg / secondArg));
+                            }
+                            break;
+                        case ActionButton.EQUALS:
+                            ARGUMENT.append(doublePrimeToInt(firstArg));
+                            break;
+                    }
+                }
+
+            default:
+                if (actionId == ActionButton.PLUS || actionId == ActionButton.MINUS || actionId == ActionButton.DIVISION || actionId == ActionButton.MULTIPLY) {
+                    if (state == State.firstArgInput) {
+                        firstArg = Double.parseDouble(ARGUMENT.toString());
+                        state = State.secondArgInput;
+                        EXPRESSION.append(ARGUMENT);
+                        ARGUMENT.setLength(0);
+                        ARGUMENT.append(0);
+                    } else if (state == State.secondArgInput) {
+                        EXPRESSION.deleteCharAt(EXPRESSION.length() - 1);
+                    } else if (state == State.resultShow) {
+                        firstArg = Double.parseDouble(ARGUMENT.toString());
+                        state = State.secondArgInput;
+                        EXPRESSION.setLength(0);
+                        EXPRESSION.append(ARGUMENT);
+                        ARGUMENT.setLength(0);
+                    }
+
+                    switch (actionId) {
+                        case ActionButton.PLUS:
+                            actionSelected = ActionButton.PLUS;
+                            EXPRESSION.append("+");
+                            break;
+                        case ActionButton.MINUS:
+                            actionSelected = ActionButton.MINUS;
+                            EXPRESSION.append("-");
+                            break;
+                        case ActionButton.MULTIPLY:
+                            actionSelected = ActionButton.MULTIPLY;
+                            EXPRESSION.append("×");
+                            break;
+                        case ActionButton.DIVISION:
+                            actionSelected = ActionButton.DIVISION;
+                            EXPRESSION.append("÷");
+                            break;
+                    }
+                }
         }
 
     }
