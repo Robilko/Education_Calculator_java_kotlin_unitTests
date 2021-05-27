@@ -27,8 +27,7 @@
             android:id="@+id/result"
             style="@style/display_land"
             android:layout_weight="1"
-            android:textAlignment="textEnd"
-            android:text="@string/start_value" />
+            android:textAlignment="textEnd" />
     </LinearLayout>
 
     <LinearLayout

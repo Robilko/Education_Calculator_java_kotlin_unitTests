@@ -36,8 +36,7 @@
             android:id="@+id/result"
             style="@style/display"
             android:layout_weight="4"
-            android:gravity="bottom|end"
-            android:text="@string/start_value" />
+            android:gravity="bottom|end" />
     </LinearLayout>
 
     <ImageButton

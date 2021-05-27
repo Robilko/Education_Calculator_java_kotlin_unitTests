@@ -1,7 +1,9 @@
 package com.robivan.calculator;
 
 
-public class CalculatorModel {
+import java.io.Serializable;
+
+public class CalculatorModel implements Serializable {
     private double firstArg;
     private boolean hasDot = false;
     private final int ARG_MAX_LENGTH = 20;
