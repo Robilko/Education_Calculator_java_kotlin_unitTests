@@ -7,6 +7,7 @@ public class CalculatorModel implements Serializable {
     private double firstArg;
     private boolean hasDot = false;
     private final int ARG_MAX_LENGTH = 20;
+    private final String DIV_BY_ZERO = "Разделить на ноль нельзя";
 
     private final StringBuilder ARGUMENT = new StringBuilder();
     private final StringBuilder EXPRESSION = new StringBuilder();
@@ -83,6 +84,17 @@ public class CalculatorModel implements Serializable {
                         hasDot = true;
                     }
                     break;
+                case  ActionButton.PERCENT:
+                    if (ARGUMENT.length() == 0) {
+                        ARGUMENT.append("0");
+                    }
+                        double tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
+                        if (tmp % 1 != 0) {
+                            hasDot = true;
+                        }
+                        ARGUMENT.setLength(0);
+                        ARGUMENT.append(doublePrimeToInt(tmp));
+                    break;
             }
         }
 
@@ -116,12 +128,6 @@ public class CalculatorModel implements Serializable {
                 }
                 break;
 
-            case  ActionButton.PERCENT:
-                tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
-                ARGUMENT.setLength(0);
-                ARGUMENT.append(doublePrimeToInt(tmp));
-                break;
-
             case ActionButton.EQUALS:
                 if (state == State.firstArgInput) {
                     firstArg = Double.parseDouble(ARGUMENT.toString());
@@ -145,8 +151,8 @@ public class CalculatorModel implements Serializable {
                             ARGUMENT.append(doublePrimeToInt(firstArg * secondArg));
                             break;
                         case ActionButton.DIVISION:
-                            if (firstArg == 0 || secondArg == 0) {
-                                ARGUMENT.append(0);
+                            if (secondArg == 0) {
+                                ARGUMENT.append(DIV_BY_ZERO);
                             } else {
                                 ARGUMENT.append(doublePrimeToInt(firstArg / secondArg));
                             }
@@ -164,10 +170,14 @@ public class CalculatorModel implements Serializable {
                         state = State.secondArgInput;
                         EXPRESSION.append(ARGUMENT);
                         ARGUMENT.setLength(0);
-                        ARGUMENT.append(0);
+                        ARGUMENT.append("0");
                     } else if (state == State.secondArgInput) {
                         EXPRESSION.deleteCharAt(EXPRESSION.length() - 1);
                     } else if (state == State.resultShow) {
+                        if (ARGUMENT.toString().equals(DIV_BY_ZERO)) {
+                            ARGUMENT.setLength(0);
+                            ARGUMENT.append("0");
+                        }
                         firstArg = Double.parseDouble(ARGUMENT.toString());
                         state = State.secondArgInput;
                         EXPRESSION.setLength(0);
@@ -206,7 +216,7 @@ public class CalculatorModel implements Serializable {
         return EXPRESSION.toString();
     }
 
-    private String doublePrimeToInt(double number) {
+    private String doublePrimeToInt(double number) { //TODO переделать метод без каста в int
         String result = "";
         if (number % 1 == 0)
             result +=(int)number;

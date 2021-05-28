@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.seven,
                 R.id.eight,
                 R.id.nine,
+                R.id.percent,
                 R.id.dot
         };
 
@@ -81,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 R.id.minus,
                 R.id.multiply,
                 R.id.division,
-                R.id.percent,
                 R.id.plus_minus,
                 R.id.equals,
                 R.id.backspace,
