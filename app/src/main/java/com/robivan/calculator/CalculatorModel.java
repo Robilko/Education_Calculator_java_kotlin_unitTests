@@ -5,9 +5,6 @@ import java.io.Serializable;
 
 public class CalculatorModel implements Serializable {
     private double firstArg;
-    private boolean hasDot = false;
-    private final int ARG_MAX_LENGTH = 20;
-    private final String DIV_BY_ZERO = "Разделить на ноль нельзя";
 
     private final StringBuilder ARGUMENT = new StringBuilder();
     private final StringBuilder EXPRESSION = new StringBuilder();
@@ -33,6 +30,7 @@ public class CalculatorModel implements Serializable {
             state = State.firstArgInput;
         }
 
+        int ARG_MAX_LENGTH = 20;
         if (ARGUMENT.length() < ARG_MAX_LENGTH) {
             if (ARGUMENT.length() == 1 && ARGUMENT.charAt(0) == '0') {
                 ARGUMENT.setLength(0);
@@ -78,10 +76,8 @@ public class CalculatorModel implements Serializable {
                 case NumberButton.DOT:
                     if (ARGUMENT.length() == 0) {
                         ARGUMENT.append("0.");
-                        hasDot = true;
-                    } else if (!hasDot) {
+                    } else if (!ARGUMENT.toString().contains(".")) {
                         ARGUMENT.append(".");
-                        hasDot = true;
                     }
                     break;
                 case  ActionButton.PERCENT:
@@ -89,11 +85,8 @@ public class CalculatorModel implements Serializable {
                         ARGUMENT.append("0");
                     }
                         double tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
-                        if (tmp % 1 != 0) {
-                            hasDot = true;
-                        }
                         ARGUMENT.setLength(0);
-                        ARGUMENT.append(doublePrimeToInt(tmp));
+                        ARGUMENT.append(doublePrime(tmp));
                     break;
             }
         }
@@ -101,12 +94,12 @@ public class CalculatorModel implements Serializable {
     }
 
     public void onActionPressed(int actionId) {
-        hasDot = false;
-        double tmp = 0;
+        double tmp;
         if (ARGUMENT.length() == 0) {
             ARGUMENT.append("0");
         }
 
+        String DIV_BY_ZERO = "Разделить на ноль нельзя";
         switch (actionId) {
             case ActionButton.CLEAR:
                 ARGUMENT.setLength(0);
@@ -118,7 +111,7 @@ public class CalculatorModel implements Serializable {
             case ActionButton.PLUS_MINUS:
                 tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
                 ARGUMENT.setLength(0);
-                ARGUMENT.append(doublePrimeToInt(tmp));
+                ARGUMENT.append(doublePrime(tmp));
                 break;
 
             case ActionButton.BACKSPACE:
@@ -142,23 +135,23 @@ public class CalculatorModel implements Serializable {
                     ARGUMENT.setLength(0);
                     switch (actionSelected) {
                         case ActionButton.PLUS:
-                            ARGUMENT.append(doublePrimeToInt(firstArg + secondArg));
+                            ARGUMENT.append(doublePrime(firstArg + secondArg));
                             break;
                         case ActionButton.MINUS:
-                            ARGUMENT.append(doublePrimeToInt(firstArg - secondArg));
+                            ARGUMENT.append(doublePrime(firstArg - secondArg));
                             break;
                         case ActionButton.MULTIPLY:
-                            ARGUMENT.append(doublePrimeToInt(firstArg * secondArg));
+                            ARGUMENT.append(doublePrime(firstArg * secondArg));
                             break;
                         case ActionButton.DIVISION:
                             if (secondArg == 0) {
                                 ARGUMENT.append(DIV_BY_ZERO);
                             } else {
-                                ARGUMENT.append(doublePrimeToInt(firstArg / secondArg));
+                                ARGUMENT.append(doublePrime(firstArg / secondArg));
                             }
                             break;
                         case ActionButton.EQUALS:
-                            ARGUMENT.append(doublePrimeToInt(firstArg));
+                            ARGUMENT.append(doublePrime(firstArg));
                             break;
                     }
                 }
@@ -216,12 +209,14 @@ public class CalculatorModel implements Serializable {
         return EXPRESSION.toString();
     }
 
-    private String doublePrimeToInt(double number) { //TODO переделать метод без каста в int
+    private String doublePrime(double number) {
         String result = "";
-        if (number % 1 == 0)
-            result +=(int)number;
-        else
-            result +=number;
+        if (number % 1 == 0) {
+            result += (long) number;
+        }
+        else {
+            result += number;
+        }
         return result;
     }
 
