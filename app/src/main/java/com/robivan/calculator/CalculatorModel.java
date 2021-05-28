@@ -4,7 +4,8 @@ package com.robivan.calculator;
 import java.io.Serializable;
 
 public class CalculatorModel implements Serializable {
-    private double firstArg;
+    private double firstArg, secondArg;
+    String DIV_BY_ZERO = "Разделить на ноль нельзя";
 
     private final StringBuilder ARGUMENT = new StringBuilder();
     private final StringBuilder EXPRESSION = new StringBuilder();
@@ -35,59 +36,25 @@ public class CalculatorModel implements Serializable {
             if (ARGUMENT.length() == 1 && ARGUMENT.charAt(0) == '0') {
                 ARGUMENT.setLength(0);
             }
-            switch (buttonId) {
-                case NumberButton.ONE:
-                    ARGUMENT.append("1");
-                    break;
-                case NumberButton.TWO:
-                    ARGUMENT.append("2");
-                    break;
-                case NumberButton.THREE:
-                    ARGUMENT.append("3");
-                    break;
-                case NumberButton.FOUR:
-                    ARGUMENT.append("4");
-                    break;
-                case NumberButton.FIVE:
-                    ARGUMENT.append("5");
-                    break;
-                case NumberButton.SIX:
-                    ARGUMENT.append("6");
-                    break;
-                case NumberButton.SEVEN:
-                    ARGUMENT.append("7");
-                    break;
-                case NumberButton.EIGHT:
-                    ARGUMENT.append("8");
-                    break;
-                case NumberButton.NINE:
-                    ARGUMENT.append("9");
-                    break;
-                case NumberButton.ZERO:
+
+            if (buttonId == Util.DOUBLE_ZERO) {
+                if (ARGUMENT.length() == 0) {
                     ARGUMENT.append("0");
-                    break;
-                case NumberButton.DOUBLE_ZERO:
-                    if (ARGUMENT.length() == 0) {
-                        ARGUMENT.append("0");
-                    } else {
-                        ARGUMENT.append("00");
+                } else {
+                    ARGUMENT.append("00");
+                }
+            }else if (buttonId == Util.DOT) {
+                if (ARGUMENT.length() == 0) {
+                    ARGUMENT.append("0.");
+                } else if (!ARGUMENT.toString().contains(".")) {
+                    ARGUMENT.append(".");
+                }
+            } else {
+                for (int i = 0; i < Util.NUMBER_IDS.length; i++) {
+                    if (buttonId == Util.NUMBER_IDS[i]) {
+                        ARGUMENT.append(i);
                     }
-                    break;
-                case NumberButton.DOT:
-                    if (ARGUMENT.length() == 0) {
-                        ARGUMENT.append("0.");
-                    } else if (!ARGUMENT.toString().contains(".")) {
-                        ARGUMENT.append(".");
-                    }
-                    break;
-                case  ActionButton.PERCENT:
-                    if (ARGUMENT.length() == 0) {
-                        ARGUMENT.append("0");
-                    }
-                        double tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
-                        ARGUMENT.setLength(0);
-                        ARGUMENT.append(doublePrime(tmp));
-                    break;
+                }
             }
         }
 
@@ -99,65 +66,73 @@ public class CalculatorModel implements Serializable {
             ARGUMENT.append("0");
         }
 
-        String DIV_BY_ZERO = "Разделить на ноль нельзя";
         switch (actionId) {
-            case ActionButton.CLEAR:
+            case Util.CLEAR:
                 ARGUMENT.setLength(0);
                 EXPRESSION.setLength(0);
                 state = State.resultShow;
                 ARGUMENT.append("0");
                 break;
 
-            case ActionButton.PLUS_MINUS:
+            case Util.PLUS_MINUS:
                 tmp = Double.parseDouble(ARGUMENT.toString()) * -1;
                 ARGUMENT.setLength(0);
                 ARGUMENT.append(doublePrime(tmp));
                 break;
 
-            case ActionButton.BACKSPACE:
+            case Util.BACKSPACE:
                 ARGUMENT.deleteCharAt(ARGUMENT.length() - 1);
                 if (ARGUMENT.length() == 0) {
                     ARGUMENT.append("0");
                 }
                 break;
 
-            case ActionButton.EQUALS:
+            case  Util.PERCENT:
+                if (ARGUMENT.length() == 0) {
+                    ARGUMENT.append("0");
+                }
+                tmp = Double.parseDouble(ARGUMENT.toString()) / 100;
+                ARGUMENT.setLength(0);
+                ARGUMENT.append(doublePrime(tmp));
+                break;
+
+            case Util.EQUALS:
                 if (state == State.firstArgInput) {
                     firstArg = Double.parseDouble(ARGUMENT.toString());
                     state = State.secondArgInput;
-                    actionSelected = ActionButton.EQUALS;
+                    actionSelected = Util.EQUALS;
                 }
                 if (state == State.secondArgInput) {
-                    double secondArg = Double.parseDouble(ARGUMENT.toString());
+                    secondArg = Double.parseDouble(ARGUMENT.toString());
                     state = State.resultShow;
                     EXPRESSION.append(ARGUMENT);
                     EXPRESSION.append("=");
                     ARGUMENT.setLength(0);
                     switch (actionSelected) {
-                        case ActionButton.PLUS:
+                        case Util.PLUS:
                             ARGUMENT.append(doublePrime(firstArg + secondArg));
                             break;
-                        case ActionButton.MINUS:
+                        case Util.MINUS:
                             ARGUMENT.append(doublePrime(firstArg - secondArg));
                             break;
-                        case ActionButton.MULTIPLY:
+                        case Util.MULTIPLY:
                             ARGUMENT.append(doublePrime(firstArg * secondArg));
                             break;
-                        case ActionButton.DIVISION:
+                        case Util.DIVISION:
                             if (secondArg == 0) {
                                 ARGUMENT.append(DIV_BY_ZERO);
                             } else {
                                 ARGUMENT.append(doublePrime(firstArg / secondArg));
                             }
                             break;
-                        case ActionButton.EQUALS:
+                        case Util.EQUALS:
                             ARGUMENT.append(doublePrime(firstArg));
                             break;
                     }
                 }
 
             default:
-                if (actionId == ActionButton.PLUS || actionId == ActionButton.MINUS || actionId == ActionButton.DIVISION || actionId == ActionButton.MULTIPLY) {
+                if (actionId == Util.PLUS || actionId == Util.MINUS || actionId == Util.DIVISION || actionId == Util.MULTIPLY) {
                     if (state == State.firstArgInput) {
                         firstArg = Double.parseDouble(ARGUMENT.toString());
                         state = State.secondArgInput;
@@ -179,20 +154,20 @@ public class CalculatorModel implements Serializable {
                     }
 
                     switch (actionId) {
-                        case ActionButton.PLUS:
-                            actionSelected = ActionButton.PLUS;
+                        case Util.PLUS:
+                            actionSelected = Util.PLUS;
                             EXPRESSION.append("+");
                             break;
-                        case ActionButton.MINUS:
-                            actionSelected = ActionButton.MINUS;
+                        case Util.MINUS:
+                            actionSelected = Util.MINUS;
                             EXPRESSION.append("-");
                             break;
-                        case ActionButton.MULTIPLY:
-                            actionSelected = ActionButton.MULTIPLY;
+                        case Util.MULTIPLY:
+                            actionSelected = Util.MULTIPLY;
                             EXPRESSION.append("×");
                             break;
-                        case ActionButton.DIVISION:
-                            actionSelected = ActionButton.DIVISION;
+                        case Util.DIVISION:
+                            actionSelected = Util.DIVISION;
                             EXPRESSION.append("÷");
                             break;
                     }
