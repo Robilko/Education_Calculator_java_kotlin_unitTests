@@ -31,7 +31,7 @@ public class CalculatorModel implements Serializable {
             state = State.firstArgInput;
         }
 
-        int ARG_MAX_LENGTH = 20;
+        int ARG_MAX_LENGTH = 15;
         if (ARGUMENT.length() < ARG_MAX_LENGTH) {
             if (ARGUMENT.length() == 1 && ARGUMENT.charAt(0) == '0') {
                 ARGUMENT.setLength(0);
