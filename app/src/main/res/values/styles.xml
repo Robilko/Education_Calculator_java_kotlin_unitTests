@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="table_row">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
     <style name="display">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
@@ -22,7 +27,7 @@
 
     <style name="calc_button">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_margin">@dimen/half_default_margin</item>
         <item name="android:layout_weight">1</item>
         <item name="backgroundTintMode">add</item>
@@ -41,20 +46,17 @@
     </style>
 
     <style name="ac_button" parent="calc_button">
-        <item name="backgroundTint">@color/red_A700_transparent</item>
+        <item name="backgroundTint">@color/red_a700_transparent</item>
     </style>
 
     <style name="ac_button_land" parent="calc_button_land">
-        <item name="backgroundTint">@color/red_A700_transparent</item>
+        <item name="backgroundTint">@color/red_a700_transparent</item>
     </style>
 
     <style name="backspace_button" parent="calc_button">
         <item name="tint">@color/orange_900</item>
         <item name="backgroundTint">@color/orange_900_transparent</item>
-        <item name="android:layout_width">90dp</item>
-        <item name="android:layout_height">70dp</item>
         <item name="android:scaleType">center</item>
-        <item name="android:layout_margin">@dimen/half_default_margin</item>
         <item name="srcCompat">@android:drawable/ic_input_delete</item>
     </style>
 
@@ -66,12 +68,12 @@
     </style>
 
     <style name="equals_button" parent="calc_button">
-        <item name="backgroundTint">@color/light_green_A700_transparent</item>
-        <item name="android:textColor">@color/light_green_A700</item>
+        <item name="backgroundTint">@color/light_green_a700_transparent</item>
+        <item name="android:textColor">@color/light_green_a700</item>
     </style>
 
     <style name="equals_button_land" parent="calc_button_land">
-        <item name="backgroundTint">@color/light_green_A700_transparent</item>
-        <item name="android:textColor">@color/light_green_A700</item>
+        <item name="backgroundTint">@color/light_green_a700_transparent</item>
+        <item name="android:textColor">@color/light_green_a700</item>
     </style>
 </resources>
