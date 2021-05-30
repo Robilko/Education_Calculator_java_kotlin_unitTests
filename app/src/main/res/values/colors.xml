@@ -8,14 +8,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="red_A700">#D50000</color>
+    <color name="red_A700_transparent">#99D50000</color>
     <color name="red_900">#B71C1C</color>
     <color name="teal_900">#004D40</color>
     <color name="teal_900_transparent">#66004D40</color>
     <color name="light_green_A700">#64DD17</color>
     <color name="light_green_A700_transparent">#9964DD17</color>
     <color name="orange_300">#FFB74D</color>
+    <color name="orange_900_transparent">#99E65100</color>
     <color name="orange_900">#E65100</color>
-    <color name="orange_A700">#FF6D00</color>
     <color name="blue_gray_700">#455A64</color>
 </resources>
