@@ -18,4 +18,5 @@
     <color name="orange_900_transparent">#99E65100</color>
     <color name="orange_900">#E65100</color>
     <color name="blue_gray_700">#455A64</color>
+    <color name="blue_gray_700_transparent">#99455A64</color>
 </resources>

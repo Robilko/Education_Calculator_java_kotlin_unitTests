@@ -11,38 +11,43 @@
         <item name="android:layout_margin">@dimen/default_margin</item>
         <item name="autoSizeTextType">uniform</item>
         <item name="android:padding">10dp</item>
-        <item name="fontFamily">@font/aclonica</item>
         <item name="android:textColor">@color/blue_gray_700</item>
     </style>
 
-    <style name="display_land">
+    <style name="display_land" parent="display">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">@dimen/default_margin</item>
-        <item name="autoSizeTextType">uniform</item>
-        <item name="android:padding">10dp</item>
-        <item name="fontFamily">@font/aclonica</item>
-        <item name="android:textColor">@color/blue_gray_700</item>
     </style>
 
     <style name="calc_button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">@dimen/half_default_margin</item>
+        <item name="android:layout_margin">3dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="backgroundTintMode">add</item>
-        <item name="backgroundTint">@color/teal_900_transparent</item>
-        <item name="android:background">@drawable/button_all</item>
-        <item name="android:fontFamily">@font/aclonica</item>
+        <item name="android:background">@drawable/calc_button</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:padding">10dp</item>
         <item name="android:textColor">@color/teal_100</item>>
     </style>
 
     <style name="calc_button_land" parent="calc_button">
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">3dp</item>
         <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="operand_button" parent="calc_button">
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+    </style>
+
+    <style name="operand_button_land" parent="calc_button_land">
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+    </style>
+
+    <style name="num_button" parent="calc_button">
+        <item name="backgroundTint">@color/teal_900_transparent</item>
+    </style>
+
+    <style name="num_button_land" parent="calc_button_land">
+        <item name="backgroundTint">@color/teal_900_transparent</item>
     </style>
 
     <style name="ac_button" parent="calc_button">
@@ -53,19 +58,6 @@
         <item name="backgroundTint">@color/red_a700_transparent</item>
     </style>
 
-    <style name="backspace_button" parent="calc_button">
-        <item name="tint">@color/orange_900</item>
-        <item name="backgroundTint">@color/orange_900_transparent</item>
-        <item name="android:scaleType">center</item>
-        <item name="srcCompat">@android:drawable/ic_input_delete</item>
-    </style>
-
-    <style name="backspace_button_land" parent="calc_button_land">
-        <item name="tint">@color/orange_900</item>
-        <item name="backgroundTint">@color/orange_900_transparent</item>
-        <item name="android:scaleType">center</item>
-        <item name="srcCompat">@android:drawable/ic_input_delete</item>
-    </style>
 
     <style name="equals_button" parent="calc_button">
         <item name="backgroundTint">@color/light_green_a700_transparent</item>
@@ -76,4 +68,17 @@
         <item name="backgroundTint">@color/light_green_a700_transparent</item>
         <item name="android:textColor">@color/light_green_a700</item>
     </style>
+
+    <style name="backspace_button" parent="calc_button">
+        <item name="tint">@color/orange_900</item>
+        <item name="backgroundTint">@color/orange_900_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_input_delete</item>
+    </style>
+
+    <style name="backspace_button_land" parent="calc_button_land">
+        <item name="tint">@color/orange_900</item>
+        <item name="backgroundTint">@color/orange_900_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_input_delete</item>
+    </style>
+
 </resources>
