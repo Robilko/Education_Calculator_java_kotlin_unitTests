@@ -44,9 +44,8 @@
             <TableRow
                 style="@style/table_row" >
 
-                <com.google.android.material.button.MaterialButton
-                    android:visibility="invisible"
-                    style="@style/calc_button"/>
+                <ToggleButton
+                    style="@style/toggle_button"/>
                 <com.google.android.material.button.MaterialButton
                     android:visibility="invisible"
                     style="@style/calc_button"/>
