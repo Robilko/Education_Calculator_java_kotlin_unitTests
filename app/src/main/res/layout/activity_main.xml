@@ -1,184 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background"
+    android:layout_width="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/text_panel"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/default_margin"
-        android:background="@drawable/back">
-
-        <TextView
-            android:id="@+id/expression"
-            style="@style/display"
-            android:layout_weight="2"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/result"
-            style="@style/display"
-            android:layout_weight="4"
-            android:gravity="bottom|end" />
-    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/background_layout"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/default_margin">
+        style="@style/main_layout">
 
-        <TableLayout
-            android:id="@+id/button_panel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/text_panel"
+            style="@style/text_layout">
 
-            <TableRow
-                style="@style/table_row" >
+            <TextView
+                android:id="@+id/expression"
+                style="@style/display"
+                android:layout_weight="2"
+                android:textStyle="italic" />
 
-                <ToggleButton
-                    style="@style/toggle_button"/>
-                <com.google.android.material.button.MaterialButton
-                    android:visibility="invisible"
-                    style="@style/calc_button"/>
-                <com.google.android.material.button.MaterialButton
-                    android:visibility="invisible"
-                    style="@style/calc_button"/>
+            <TextView
+                android:id="@+id/result"
+                style="@style/display"
+                android:layout_weight="4"
+                android:gravity="bottom|end" />
+        </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/backspace"
-                    style="@style/backspace_button" />
+        <LinearLayout
+            style="@style/number_layout">
 
-            </TableRow>
+            <TableLayout
+                android:id="@+id/button_panel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TableRow
-                style="@style/table_row" >
+                <TableRow
+                    style="@style/table_row" >
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/clear"
-                    style="@style/ac_button"
-                    android:text="@string/clear" />
+                    <ToggleButton
+                        />
+                    <com.google.android.material.button.MaterialButton
+                        android:visibility="invisible"
+                        style="@style/calc_button"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:visibility="invisible"
+                        style="@style/calc_button"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/plus_minus"
-                    style="@style/operand_button"
-                    android:text="@string/plus_minus" />
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/backspace"
+                        style="@style/backspace_button" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/percent"
-                    style="@style/operand_button"
-                    android:text="@string/percent" />
+                </TableRow>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/division"
-                    style="@style/operand_button"
-                    android:text="@string/division" />
-            </TableRow>
+                <TableRow
+                    style="@style/table_row" >
 
-            <TableRow
-                style="@style/table_row" >
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/clear"
+                        style="@style/ac_button"
+                        android:text="@string/clear" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/seven"
-                    style="@style/num_button"
-                    android:text="@string/seven"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/plus_minus"
+                        style="@style/operand_button"
+                        android:text="@string/plus_minus" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/eight"
-                    style="@style/num_button"
-                    android:text="@string/eight"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/percent"
+                        style="@style/operand_button"
+                        android:text="@string/percent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/nine"
-                    style="@style/num_button"
-                    android:text="@string/nine" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/division"
+                        style="@style/operand_button"
+                        android:text="@string/division" />
+                </TableRow>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/multiply"
-                    style="@style/operand_button"
-                    android:text="@string/multiply"/>
-            </TableRow>
+                <TableRow
+                    style="@style/table_row" >
 
-            <TableRow
-                style="@style/table_row" >
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/seven"
+                        style="@style/num_button"
+                        android:text="@string/seven"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/four"
-                    style="@style/num_button"
-                    android:text="@string/four" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/eight"
+                        style="@style/num_button"
+                        android:text="@string/eight"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/five"
-                    style="@style/num_button"
-                    android:text="@string/five" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/nine"
+                        style="@style/num_button"
+                        android:text="@string/nine" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/six"
-                    style="@style/num_button"
-                    android:text="@string/six"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/multiply"
+                        style="@style/operand_button"
+                        android:text="@string/multiply"/>
+                </TableRow>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/minus"
-                    style="@style/operand_button"
-                    android:text="@string/minus" />
-            </TableRow>
+                <TableRow
+                    style="@style/table_row" >
 
-            <TableRow
-                style="@style/table_row" >
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/four"
+                        style="@style/num_button"
+                        android:text="@string/four" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/one"
-                    style="@style/num_button"
-                    android:text="@string/one" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/five"
+                        style="@style/num_button"
+                        android:text="@string/five" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/two"
-                    style="@style/num_button"
-                    android:text="@string/two"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/six"
+                        style="@style/num_button"
+                        android:text="@string/six"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/three"
-                    style="@style/num_button"
-                    android:text="@string/three" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/minus"
+                        style="@style/operand_button"
+                        android:text="@string/minus" />
+                </TableRow>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/plus"
-                    style="@style/operand_button"
-                    android:text="@string/plus"/>
+                <TableRow
+                    style="@style/table_row" >
 
-            </TableRow>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/one"
+                        style="@style/num_button"
+                        android:text="@string/one" />
 
-            <TableRow
-                style="@style/table_row" >
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/two"
+                        style="@style/num_button"
+                        android:text="@string/two"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/zero"
-                    style="@style/num_button"
-                    android:text="@string/zero" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/three"
+                        style="@style/num_button"
+                        android:text="@string/three" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/dot"
-                    style="@style/num_button"
-                    android:text="@string/dot" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/plus"
+                        style="@style/operand_button"
+                        android:text="@string/plus"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/double_zero"
-                    style="@style/num_button"
-                    android:text="@string/double_zero" />
+                </TableRow>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/equals"
-                    style="@style/equals_button"
-                    android:text="@string/equals"/>
-            </TableRow>
-        </TableLayout>
+                <TableRow
+                    style="@style/table_row" >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/zero"
+                        style="@style/num_button"
+                        android:text="@string/zero" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/dot"
+                        style="@style/num_button"
+                        android:text="@string/dot" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/double_zero"
+                        style="@style/num_button"
+                        android:text="@string/double_zero" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/equals"
+                        style="@style/equals_button"
+                        android:text="@string/equals"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>
