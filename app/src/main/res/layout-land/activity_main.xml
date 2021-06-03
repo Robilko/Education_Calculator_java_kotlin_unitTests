@@ -40,6 +40,11 @@
                     android:layout_height="0dp"
                     android:layout_weight="1">
 
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/settings"
+                        style="@style/settings_button"
+                        />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/clear"
                         style="@style/ac_button_land"
@@ -49,6 +54,7 @@
                         android:id="@+id/backspace"
                         style="@style/backspace_button_land"
                         android:scaleType="center"/>
+
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/plus_minus"
@@ -162,7 +168,6 @@
                         android:text="@string/dot"/>
 
                     <com.google.android.material.button.MaterialButton
-                        android:layout_weight="1"
                         android:id="@+id/double_zero"
                         style="@style/num_button_land"
                         android:text="@string/double_zero" />

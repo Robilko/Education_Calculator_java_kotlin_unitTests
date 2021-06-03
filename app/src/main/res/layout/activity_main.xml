@@ -8,6 +8,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         style="@style/background_layout"/>
 
+
     <LinearLayout
         style="@style/main_layout">
 
@@ -39,11 +40,14 @@
                 <TableRow
                     style="@style/table_row" >
 
-                    <ToggleButton
-                        />
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/settings"
+                        style="@style/settings_button"
+                        android:layout_weight="0.5"/>
                     <com.google.android.material.button.MaterialButton
                         android:visibility="invisible"
-                        style="@style/calc_button"/>
+                        style="@style/calc_button"
+                        android:layout_weight="1.5"/>
                     <com.google.android.material.button.MaterialButton
                         android:visibility="invisible"
                         style="@style/calc_button"/>

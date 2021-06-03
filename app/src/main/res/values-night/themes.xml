@@ -43,6 +43,7 @@
 
     <style name="num_button_land" parent="calc_button_land">
         <item name="backgroundTint">@color/blue_gray_200_transparent</item>
+        <item name="android:layout_weight">1.4</item>
     </style>
 
     <style name="ac_button" parent="calc_button">
@@ -51,6 +52,7 @@
 
     <style name="ac_button_land" parent="calc_button_land">
         <item name="backgroundTint">@color/red_a200_transparent</item>
+        <item name="android:layout_weight">0.7</item>
     </style>
 
 
@@ -74,6 +76,20 @@
         <item name="tint">@color/white</item>
         <item name="backgroundTint">@color/orange_200_transparent</item>
         <item name="srcCompat">@android:drawable/ic_input_delete</item>
+    </style>
+
+    <style name="settings_button" parent="calc_button">
+        <item name="tint">@color/white</item>
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_menu_preferences</item>
+        <item name="android:layout_weight">0.4</item>
+    </style>
+
+    <style name="settings_button_land" parent="calc_button_land">
+        <item name="tint">@color/white</item>
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_menu_preferences</item>
+        <item name="android:layout_weight">0.5</item>
     </style>
 
 
