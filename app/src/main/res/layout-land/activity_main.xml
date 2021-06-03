@@ -16,19 +16,16 @@
             <TextView
                 android:id="@+id/expression"
                 style="@style/display_land"
-                android:layout_weight="1"
                 android:textStyle="italic"
                 tools:ignore="NestedWeights" />
 
             <TextView
                 android:id="@+id/result"
-                style="@style/display_land"
-                android:layout_weight="1"
-                android:textAlignment="textEnd"/>
+                style="@style/display_land"/>
         </LinearLayout>
 
         <LinearLayout
-            style="@style/number_layout_land">
+            style="@style/number_buttons_layout_land">
 
             <TableLayout
                 android:id="@+id/button_panel"

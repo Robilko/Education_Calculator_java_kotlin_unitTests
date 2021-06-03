@@ -30,7 +30,7 @@
         </LinearLayout>
 
         <LinearLayout
-            style="@style/number_layout">
+            style="@style/number_buttons_layout">
 
             <TableLayout
                 android:id="@+id/button_panel"
