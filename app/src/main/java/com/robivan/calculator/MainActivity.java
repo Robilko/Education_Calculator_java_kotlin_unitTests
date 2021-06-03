@@ -2,9 +2,12 @@ package com.robivan.calculator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialization() {
+        AppCompatImageButton btnSettings = findViewById(R.id.settings);
         calculator = new CalculatorModel();
 
 
@@ -46,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         resultScreen= findViewById(R.id.result);
 
         resultScreen.setText("0");
+
+        btnSettings.setOnClickListener(v -> {
+            Intent runSettings = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(runSettings);
+        });
 
         View.OnClickListener numberButtonClickListener = v -> {
             calculator.onNumPressed(v.getId());
