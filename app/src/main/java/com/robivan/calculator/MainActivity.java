@@ -2,6 +2,7 @@ package com.robivan.calculator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageButton;
 
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private CalculatorModel calculator;
     private TextView display, resultScreen;
+    private Settings settings;
     protected final String CALC_KEY = MainActivity.class.getCanonicalName() + "calc_key";
 
     @Override
@@ -23,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
         initialization();
 
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        setTheme();
+    }
+
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle instanceState) {
@@ -43,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private void initialization() {
         AppCompatImageButton btnSettings = findViewById(R.id.settings);
         calculator = new CalculatorModel();
-
+        settings = new Settings();
 
 
         display = findViewById(R.id.expression);
@@ -74,6 +83,18 @@ public class MainActivity extends AppCompatActivity {
 
         for (int actionId : Util.ACTION_IDS) {
             findViewById(actionId).setOnClickListener(actionButtonClickListener);
+        }
+    }
+
+    private void setTheme() {
+        String themeValue = getSharedPreferences(settings.getPREF_NAME(), MODE_PRIVATE)
+                .getString(settings.getKEY_THEME(), null);
+        if (themeValue != null && !themeValue.isEmpty()) {
+            if (themeValue.equals(settings.getKEY_DARK_THEME())){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
         }
     }
 }

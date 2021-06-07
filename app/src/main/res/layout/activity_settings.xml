@@ -36,6 +36,7 @@
             android:textSize="25sp" />
 
             <RadioGroup
+                android:id="@+id/change_theme_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/default_margin">
