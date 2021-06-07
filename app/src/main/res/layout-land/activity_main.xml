@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/text_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:background="@drawable/back">
+        <TextView
+            android:id="@+id/expression"
+            style="@style/display_land"
+            android:layout_weight="1"
+            android:textStyle="italic"
+            />
+
+        <TextView
+            android:id="@+id/result"
+            style="@style/display_land"
+            android:layout_weight="1"
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <TableLayout
+            android:id="@+id/button_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/clear"
+                    style="@style/calc_button_land"
+                    android:backgroundTint="@color/red_A700"
+                    android:text="@string/clear" />
+
+                <ImageButton
+                    android:id="@+id/backspace"
+                    style="@style/calc_button_land"
+                    android:scaleType="center"
+                    android:background="@drawable/button_all"
+                    android:tint="@color/orange_900"
+                    android:backgroundTint="@color/orange_900"
+                    app:srcCompat="@android:drawable/ic_input_delete" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/plus_minus"
+                    style="@style/calc_button_land"
+                    android:text="@string/plus_minus" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/percent"
+                    style="@style/calc_button_land"
+                    android:text="@string/percent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/division"
+                    style="@style/calc_button_land"
+                    android:text="@string/division" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/seven"
+                    style="@style/calc_button_land"
+                    android:text="@string/seven"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/eight"
+                    style="@style/calc_button_land"
+                    android:text="@string/eight"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/nine"
+                    style="@style/calc_button_land"
+                    android:text="@string/nine" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/multiply"
+                    style="@style/calc_button_land"
+                    android:text="@string/multiply" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/four"
+                    style="@style/calc_button_land"
+                    android:text="@string/four" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/five"
+                    style="@style/calc_button_land"
+                    android:text="@string/five" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/six"
+                    style="@style/calc_button_land"
+                    android:text="@string/six"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/minus"
+                    style="@style/calc_button_land"
+                    android:text="@string/minus" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one"
+                    style="@style/calc_button_land"
+                    android:text="@string/one" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/two"
+                    style="@style/calc_button_land"
+                    android:text="@string/two"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/three"
+                    style="@style/calc_button_land"
+                    android:text="@string/three" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/plus"
+                    style="@style/calc_button_land"
+                    android:text="@string/plus" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/zero"
+                    style="@style/calc_button_land"
+                    android:text="@string/zero" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dot"
+                    style="@style/calc_button_land"
+                    android:text="@string/dot"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_weight="1"
+                    android:id="@+id/double_zero"
+                    style="@style/calc_button_land"
+                    android:text="@string/double_zero" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/equals"
+                    style="@style/calc_button_land"
+                    android:backgroundTint="@color/light_green_A700_transparent"
+                    android:text="@string/equals"
+                    android:textColor="@color/light_green_A700" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
