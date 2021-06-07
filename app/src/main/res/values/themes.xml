@@ -1,16 +1,150 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Theme.Calculator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/teal_900_transparent</item>
+        <item name="colorPrimaryVariant">@color/blue_gray_700_transparent</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/aclonica</item>
     </style>
+
+    <style name="background_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="srcCompat">@drawable/background</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="main_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="text_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
+        <item name="android:background">@drawable/back</item>
+    </style>
+
+    <style name="text_layout_land" parent="text_layout">
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="display">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/blue_gray_700</item>
+    </style>
+
+    <style name="display_land" parent="display">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="number_buttons_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">4</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
+    </style>
+
+    <style name="number_buttons_layout_land" parent="number_buttons_layout">
+        <item name="android:layout_weight">3</item>
+    </style>
+
+
+    <style name="table_row">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="calc_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/calc_button</item>
+        <item name="android:autoSizeTextType" tools:ignore="NewApi">uniform</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/teal_100</item>>
+    </style>
+
+    <style name="calc_button_land" parent="calc_button">
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="operand_button" parent="calc_button">
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+    </style>
+
+    <style name="operand_button_land" parent="calc_button_land">
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+    </style>
+
+    <style name="num_button" parent="calc_button">
+        <item name="backgroundTint">@color/teal_900_transparent</item>
+    </style>
+
+    <style name="num_button_land" parent="calc_button_land">
+        <item name="backgroundTint">@color/teal_900_transparent</item>
+        <item name="android:layout_weight">1.4</item>
+    </style>
+
+    <style name="ac_button" parent="calc_button">
+        <item name="backgroundTint">@color/red_a700_transparent</item>
+    </style>
+
+    <style name="ac_button_land" parent="calc_button_land">
+        <item name="backgroundTint">@color/red_a700_transparent</item>
+        <item name="android:layout_weight">0.7</item>
+    </style>
+
+
+    <style name="equals_button" parent="calc_button">
+        <item name="backgroundTint">@color/light_green_a700_transparent</item>
+        <item name="android:textColor">@color/light_green_a700</item>
+    </style>
+
+    <style name="equals_button_land" parent="calc_button_land">
+        <item name="backgroundTint">@color/light_green_a700_transparent</item>
+        <item name="android:textColor">@color/light_green_a700</item>
+    </style>
+
+    <style name="backspace_button" parent="calc_button">
+        <item name="tint">@color/teal_100</item>
+        <item name="backgroundTint">@color/orange_900_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_input_delete</item>
+    </style>
+
+    <style name="backspace_button_land" parent="calc_button_land">
+        <item name="tint">@color/teal_100</item>
+        <item name="backgroundTint">@color/orange_900_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_input_delete</item>
+    </style>
+
+    <style name="settings_button" parent="calc_button">
+        <item name="tint">@color/teal_100</item>
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_menu_preferences</item>
+        <item name="android:layout_weight">0.4</item>
+    </style>
+
+    <style name="settings_button_land" parent="calc_button_land">
+        <item name="tint">@color/teal_100</item>
+        <item name="backgroundTint">@color/blue_gray_700_transparent</item>
+        <item name="srcCompat">@android:drawable/ic_menu_preferences</item>
+        <item name="android:layout_weight">0.5</item>
+    </style>
+
+
 </resources>

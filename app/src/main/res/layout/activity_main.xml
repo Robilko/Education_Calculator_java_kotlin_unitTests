@@ -1,196 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background"
-        android:scaleType="centerCrop" />
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/background_layout"/>
 
 
     <LinearLayout
-        android:id="@+id/text_panel"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:background="@drawable/back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/backspace">
+        style="@style/main_layout">
 
-        <TextView
-            android:id="@+id/expression"
-            style="@style/display"
-            android:layout_weight="2"
-            android:textStyle="italic" />
+        <LinearLayout
+            android:id="@+id/text_panel"
+            style="@style/text_layout">
 
-        <TextView
-            android:id="@+id/result"
-            style="@style/display"
-            android:layout_weight="4"
-            android:gravity="bottom|end" />
+            <TextView
+                android:id="@+id/expression"
+                style="@style/display"
+                android:layout_weight="2"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/result"
+                style="@style/display"
+                android:layout_weight="4"
+                android:gravity="bottom|end" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/number_buttons_layout">
+
+            <TableLayout
+                android:id="@+id/button_panel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    style="@style/table_row" >
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/settings"
+                        style="@style/settings_button"
+                        android:layout_weight="0.5"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:visibility="invisible"
+                        style="@style/calc_button"
+                        android:layout_weight="1.5"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:visibility="invisible"
+                        style="@style/calc_button"/>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/backspace"
+                        style="@style/backspace_button" />
+
+                </TableRow>
+
+                <TableRow
+                    style="@style/table_row" >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/clear"
+                        style="@style/ac_button"
+                        android:text="@string/clear" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/plus_minus"
+                        style="@style/operand_button"
+                        android:text="@string/plus_minus" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/percent"
+                        style="@style/operand_button"
+                        android:text="@string/percent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/division"
+                        style="@style/operand_button"
+                        android:text="@string/division" />
+                </TableRow>
+
+                <TableRow
+                    style="@style/table_row" >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/seven"
+                        style="@style/num_button"
+                        android:text="@string/seven"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/eight"
+                        style="@style/num_button"
+                        android:text="@string/eight"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/nine"
+                        style="@style/num_button"
+                        android:text="@string/nine" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/multiply"
+                        style="@style/operand_button"
+                        android:text="@string/multiply"/>
+                </TableRow>
+
+                <TableRow
+                    style="@style/table_row" >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/four"
+                        style="@style/num_button"
+                        android:text="@string/four" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/five"
+                        style="@style/num_button"
+                        android:text="@string/five" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/six"
+                        style="@style/num_button"
+                        android:text="@string/six"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/minus"
+                        style="@style/operand_button"
+                        android:text="@string/minus" />
+                </TableRow>
+
+                <TableRow
+                    style="@style/table_row" >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/one"
+                        style="@style/num_button"
+                        android:text="@string/one" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/two"
+                        style="@style/num_button"
+                        android:text="@string/two"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/three"
+                        style="@style/num_button"
+                        android:text="@string/three" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/plus"
+                        style="@style/operand_button"
+                        android:text="@string/plus"/>
+
+                </TableRow>
+
+                <TableRow
+                    style="@style/table_row" >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/zero"
+                        style="@style/num_button"
+                        android:text="@string/zero" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/dot"
+                        style="@style/num_button"
+                        android:text="@string/dot" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/double_zero"
+                        style="@style/num_button"
+                        android:text="@string/double_zero" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/equals"
+                        style="@style/equals_button"
+                        android:text="@string/equals"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/backspace"
-        android:layout_width="90dp"
-        android:layout_height="70dp"
-        android:layout_margin="5dp"
-        android:scaleType="center"
-        android:background="@drawable/button_all"
-        android:tint="@color/orange_900"
-        android:backgroundTint="@color/orange_900"
-        app:layout_constraintBottom_toTopOf="@+id/button_panel"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_input_delete" />
-
-
-    <TableLayout
-        android:id="@+id/button_panel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_panel"
-        app:layout_constraintVertical_bias="1.0">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/clear"
-                style="@style/calc_button"
-                android:backgroundTint="@color/red_A700"
-                android:text="@string/clear" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/plus_minus"
-                style="@style/calc_button"
-                android:text="@string/plus_minus" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/percent"
-                style="@style/calc_button"
-                android:text="@string/percent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/division"
-                style="@style/calc_button"
-                android:text="@string/division" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/seven"
-                style="@style/calc_button"
-                android:text="@string/seven"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/eight"
-                style="@style/calc_button"
-                android:text="@string/eight"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/nine"
-                style="@style/calc_button"
-                android:text="@string/nine" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/multiply"
-                style="@style/calc_button"
-                android:text="@string/multiply"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/four"
-                style="@style/calc_button"
-                android:text="@string/four" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/five"
-                style="@style/calc_button"
-                android:text="@string/five" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/six"
-                style="@style/calc_button"
-                android:text="@string/six"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/minus"
-                style="@style/calc_button"
-                android:text="@string/minus" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/one"
-                style="@style/calc_button"
-                android:text="@string/one" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/two"
-                style="@style/calc_button"
-                android:text="@string/two"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/three"
-                style="@style/calc_button"
-                android:text="@string/three" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/plus"
-                style="@style/calc_button"
-                android:text="@string/plus"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/zero"
-                style="@style/calc_button"
-                android:text="@string/zero" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/dot"
-                style="@style/calc_button"
-                android:text="@string/dot" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/double_zero"
-                style="@style/calc_button"
-                android:text="@string/double_zero" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/equals"
-                style="@style/calc_button"
-                android:backgroundTint="@color/light_green_A700_transparent"
-                android:text="@string/equals"
-                android:textColor="@color/light_green_A700"/>
-        </TableRow>
-    </TableLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
