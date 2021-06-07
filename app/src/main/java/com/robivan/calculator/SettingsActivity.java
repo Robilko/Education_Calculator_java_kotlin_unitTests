@@ -14,7 +14,7 @@ public class SettingsActivity extends AppCompatActivity {
     RadioButton lightThemeBtn, darkThemeBtn;
     RadioGroup radioGroup;
     public static final String APP_PREFERENCES = "mySettings";
-    final String KEY_RADIOBUTTON_INDEX = "SAVED_RADIO_BUTTON_INDEX";
+    public static final String KEY_RADIOBUTTON_INDEX = "SAVED_RADIO_BUTTON_INDEX";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,6 +23,7 @@
     <string name="equals">=</string>
 
     <string name="start_value">0</string>
+    <string name="division_by_zero">Разделить на ноль нельзя</string>
 
     <string name="settings_head">Настройки</string>
     <string name="theme_head">Выберите тему приложения:</string>

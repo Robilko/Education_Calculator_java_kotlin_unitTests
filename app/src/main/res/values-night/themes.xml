@@ -3,6 +3,9 @@
         <item name="colorPrimary">@color/blue_gray_400_transparent</item>
         <item name="colorPrimaryVariant">@color/blue_gray_200_transparent</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/blue_gray_400_transparent</item>
+        <item name="colorSecondaryVariant">@color/blue_gray_200</item>
+        <item name="colorOnSecondary">@color/white</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="fontFamily">@font/aclonica</item>
     </style>

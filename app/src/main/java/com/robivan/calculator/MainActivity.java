@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private CalculatorModel calculator;
     private TextView display, resultScreen;
     private Settings settings;
-    protected final String CALC_KEY = MainActivity.class.getCanonicalName() + "calc_key";
+    private static final String CALC_KEY = MainActivity.class.getCanonicalName() + "calc_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +72,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener actionButtonClickListener = v -> {
-            calculator.onActionPressed(v.getId());
+            try {
+                calculator.onActionPressed(v.getId());
+                resultScreen.setText(calculator.getResultValue());
+            } catch (NullPointerException e) {
+                resultScreen.setText(this.getString(R.string.division_by_zero));
+            }
             display.setText(calculator.getExpressionValue());
-            resultScreen.setText(calculator.getResultValue());
         };
 
         for (int numberId : Util.NUMBER_IDS) {
