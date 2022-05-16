@@ -38,7 +38,7 @@
                     android:layout_weight="1">
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/settings"
+                        android:id="@+id/btn_settings"
                         style="@style/settings_button"
                         />
 

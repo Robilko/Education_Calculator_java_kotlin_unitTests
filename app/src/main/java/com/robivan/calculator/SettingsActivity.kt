@@ -1,64 +1,59 @@
-package com.robivan.calculator;
+package com.robivan.calculator
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
+import com.robivan.calculator.databinding.ActivitySettingsBinding
 
+class SettingsActivity : AppCompatActivity() {
 
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var radioGroup: RadioGroup
 
-public class SettingsActivity extends AppCompatActivity {
-    private Settings settings;
-    RadioButton lightThemeBtn, darkThemeBtn;
-    RadioGroup radioGroup;
-    public static final String APP_PREFERENCES = "mySettings";
-    public static final String KEY_RADIOBUTTON_INDEX = "SAVED_RADIO_BUTTON_INDEX";
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-
-        Button btnReturn = findViewById(R.id.return_button);
-        btnReturn.setOnClickListener(v -> {
-            finish();
-        });
-
-        settings = new Settings();
-        radioGroup = findViewById(R.id.change_theme_buttons);
-        radioGroup.setOnCheckedChangeListener(radioGroupOnCheckedChangeListener);
-        loadPreferences();
-    }
-
-    private void saveThemeMode(String theme) {
-        getSharedPreferences(settings.getPREF_NAME(), MODE_PRIVATE).edit().putString(settings.getKEY_THEME(), theme).apply();
-    }
-
-    RadioGroup.OnCheckedChangeListener radioGroupOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            lightThemeBtn = findViewById(R.id.radio_button_light_theme);
-            darkThemeBtn = findViewById(R.id.radio_button_dark_theme);
-
-            RadioButton checkedRadioButton = (RadioButton) radioGroup.findViewById(checkedId);
-            if (checkedRadioButton.equals(lightThemeBtn)) {
-                saveThemeMode(settings.getKEY_LIGHT_THEME());
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            } else if (checkedRadioButton.equals(darkThemeBtn)) {
-                saveThemeMode(settings.getKEY_DARK_THEME());
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            }
-
-            int checkedIndex = radioGroup.indexOfChild(checkedRadioButton);
-            getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE).edit().putInt(KEY_RADIOBUTTON_INDEX,checkedIndex).apply();
+        with(binding) {
+            radioGroup = changeThemeButtons
+            returnButton.setOnClickListener { finish() }
+            radioGroup.setOnCheckedChangeListener(radioGroupOnCheckedChangeListener)
         }
-    };
+        loadPreferences()
+    }
 
-    private void loadPreferences() {
-        int savedRadioIndex = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE).getInt(KEY_RADIOBUTTON_INDEX, 0);
-        RadioButton savedCheckedRadioButton = (RadioButton) radioGroup.getChildAt(savedRadioIndex);
-        savedCheckedRadioButton.setChecked(true);
+    private fun saveThemeMode(theme: String) {
+        getSharedPreferences(Settings.pREF_NAME, MODE_PRIVATE).edit().putString(Settings.kEY_THEME, theme).apply()
+    }
+
+    private var radioGroupOnCheckedChangeListener =
+        RadioGroup.OnCheckedChangeListener { _, checkedId ->
+            val checkedRadioButton = radioGroup.findViewById<RadioButton>(checkedId)
+            if (checkedRadioButton.equals(binding.radioButtonLightTheme)) {
+                saveThemeMode(Settings.kEY_LIGHT_THEME)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            } else if (checkedRadioButton.equals(binding.radioButtonDarkTheme)) {
+                saveThemeMode(Settings.kEY_DARK_THEME)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            val checkedIndex = radioGroup.indexOfChild(checkedRadioButton)
+            getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE).edit()
+                .putInt(KEY_RADIOBUTTON_INDEX, checkedIndex).apply()
+        }
+
+    private fun loadPreferences() {
+        val savedRadioIndex = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE).getInt(
+            KEY_RADIOBUTTON_INDEX, 0
+        )
+        val savedCheckedRadioButton = radioGroup.getChildAt(savedRadioIndex) as RadioButton?
+        savedCheckedRadioButton?.isChecked = true
+    }
+
+    companion object {
+        const val APP_PREFERENCES = "mySettings"
+        const val KEY_RADIOBUTTON_INDEX = "SAVED_RADIO_BUTTON_INDEX"
     }
 }

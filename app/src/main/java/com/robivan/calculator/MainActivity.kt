@@ -1,104 +1,93 @@
-package com.robivan.calculator;
+package com.robivan.calculator
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.content.Intent
+import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
+import com.robivan.calculator.databinding.ActivityMainBinding
+import java.lang.NullPointerException
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
-public class MainActivity extends AppCompatActivity {
-    private CalculatorModel calculator;
-    private TextView display, resultScreen;
-    private Settings settings;
-    private static final String CALC_KEY = MainActivity.class.getCanonicalName() + "calc_key";
+    private lateinit var calculator: CalculatorModel
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initialization();
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initialization()
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        setTheme();
+    override fun onStart() {
+        super.onStart()
+        setTheme()
     }
 
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle instanceState) {
-        super.onSaveInstanceState(instanceState);
-        instanceState.putSerializable(CALC_KEY, calculator);
+    override fun onSaveInstanceState(instanceState: Bundle) {
+        super.onSaveInstanceState(instanceState)
+        instanceState.putSerializable(CALC_KEY, calculator)
     }
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle instanceState) {
-        super.onRestoreInstanceState(instanceState);
+    override fun onRestoreInstanceState(instanceState: Bundle) {
+        super.onRestoreInstanceState(instanceState)
         if (instanceState.containsKey(CALC_KEY)) {
-            calculator = (CalculatorModel) instanceState.getSerializable(CALC_KEY);
-            display.setText(calculator.getExpressionValue());
-            resultScreen.setText(calculator.getResultValue());
+            calculator = instanceState.getSerializable(CALC_KEY) as CalculatorModel
+
+            with(binding) {
+                expression.text = calculator.expressionValue
+                result.text = calculator.resultValue
+            }
         }
     }
 
-    private void initialization() {
-        AppCompatImageButton btnSettings = findViewById(R.id.settings);
-        calculator = new CalculatorModel();
-        settings = new Settings();
-
-
-        display = findViewById(R.id.expression);
-        resultScreen= findViewById(R.id.result);
-
-        resultScreen.setText("0");
-
-        btnSettings.setOnClickListener(v -> {
-            Intent runSettings = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(runSettings);
-        });
-
-        View.OnClickListener numberButtonClickListener = v -> {
-            calculator.onNumPressed(v.getId());
-            display.setText(calculator.getExpressionValue());
-            resultScreen.setText(calculator.getResultValue());
-        };
-
-        View.OnClickListener actionButtonClickListener = v -> {
+    private fun initialization() {
+        calculator = CalculatorModel()
+        binding.result.text = Util.DEFAULT_MEANING
+        binding.btnSettings.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+        }
+        val numberButtonClickListener = View.OnClickListener { v: View ->
+            calculator.onNumPressed(v.id)
+            with(binding) {
+                expression.text = calculator.expressionValue
+                result.text = calculator.resultValue
+            }
+        }
+        val actionButtonClickListener = View.OnClickListener { v: View ->
             try {
-                calculator.onActionPressed(v.getId());
-                resultScreen.setText(calculator.getResultValue());
-            } catch (NullPointerException e) {
-                resultScreen.setText(this.getString(R.string.division_by_zero));
+                calculator.onActionPressed(v.id)
+                binding.result.text = calculator.resultValue
+            } catch (e: NullPointerException) {
+                binding.result.text = this.getString(R.string.division_by_zero)
             }
-            display.setText(calculator.getExpressionValue());
-        };
-
-        for (int numberId : Util.NUMBER_IDS) {
-            findViewById(numberId).setOnClickListener(numberButtonClickListener);
+            binding.expression.text = calculator.expressionValue
         }
 
-        for (int actionId : Util.ACTION_IDS) {
-            findViewById(actionId).setOnClickListener(actionButtonClickListener);
+        for (numberId in Util.NUMBER_IDS) {
+            findViewById<View>(numberId).setOnClickListener(numberButtonClickListener)
+        }
+        for (actionId in Util.ACTION_IDS) {
+            findViewById<View>(actionId).setOnClickListener(actionButtonClickListener)
         }
     }
 
-    private void setTheme() {
-        String themeValue = getSharedPreferences(settings.getPREF_NAME(), MODE_PRIVATE)
-                .getString(settings.getKEY_THEME(), null);
-        if (themeValue != null && !themeValue.isEmpty()) {
-            if (themeValue.equals(settings.getKEY_DARK_THEME())){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    private fun setTheme() {
+        getSharedPreferences(Settings.pREF_NAME, MODE_PRIVATE)
+            .getString(Settings.kEY_THEME, null)?.let { themeValue ->
+                when (themeValue) {
+                    Settings.kEY_DARK_THEME -> AppCompatDelegate.setDefaultNightMode(
+                        AppCompatDelegate.MODE_NIGHT_YES
+                    )
+                    Settings.kEY_LIGHT_THEME -> AppCompatDelegate.setDefaultNightMode(
+                        AppCompatDelegate.MODE_NIGHT_NO
+                    )
+                }
             }
-        }
+    }
+
+    companion object {
+        private val CALC_KEY = MainActivity::class.java.canonicalName?.plus("calc_key")
     }
 }
