@@ -1,6 +1,8 @@
-package com.robivan.calculator
+package com.robivan.calculator.util
 
-object Util {
+import com.robivan.calculator.R
+
+object ButtonsIds {
     const val DOUBLE_ZERO = R.id.double_zero
     const val DOT = R.id.dot
 
@@ -39,6 +41,4 @@ object Util {
         PERCENT,
         CLEAR
     )
-
-    const val DEFAULT_MEANING = "0"
 }

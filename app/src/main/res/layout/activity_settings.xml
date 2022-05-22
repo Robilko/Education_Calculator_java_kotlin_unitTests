@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/settings_layout"
-    tools:context=".SettingsActivity">
+    tools:context=".view.SettingsActivity">
 
     <TextView
         android:id="@+id/settings_head"
