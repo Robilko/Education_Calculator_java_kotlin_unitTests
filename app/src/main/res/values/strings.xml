@@ -30,5 +30,6 @@
     <string name="return_btn">Назад</string>
     <string name="theme_light">Светлая тема</string>
     <string name="theme_dark">Тёмная тема</string>
+    <string name="system_theme">Как в системе</string>
 
 </resources>

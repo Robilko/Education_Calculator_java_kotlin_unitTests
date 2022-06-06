@@ -49,6 +49,11 @@
                     android:id="@+id/radio_button_dark_theme"
                     android:text="@string/theme_dark"
                     style="@style/settings_radio_button" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_system_theme"
+                    android:text="@string/system_theme"
+                    style="@style/settings_radio_button" />
             </RadioGroup>
 
     </LinearLayout>
@@ -58,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
+        android:layout_margin="@dimen/default_margin"
         android:text="@string/return_btn"
         android:textSize="@dimen/settings_return_btn_txt_size"
         app:cornerRadius="@dimen/button_corner_radius"/>

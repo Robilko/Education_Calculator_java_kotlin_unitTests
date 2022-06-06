@@ -1,13 +1,17 @@
 package com.robivan.calculator.view
 
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.os.Bundle
+import android.view.View
 import com.robivan.calculator.util.ThemeSettings
 import com.robivan.calculator.databinding.ActivitySettingsBinding
+import com.robivan.calculator.util.ThemeSettings.KEY_DARK_THEME
 import com.robivan.calculator.util.ThemeSettings.KEY_LIGHT_THEME
+import com.robivan.calculator.util.ThemeSettings.KEY_SYSTEM_THEME
 import com.robivan.calculator.util.ThemeSettings.KEY_THEME
 import com.robivan.calculator.util.ThemeSettings.KEY_THEME_SETTINGS_RADIOBUTTON_INDEX
 import com.robivan.calculator.util.setApplicationTheme
@@ -48,11 +52,15 @@ class SettingsActivity : AppCompatActivity() {
         sharedPreferences.edit().putInt(KEY_THEME_SETTINGS_RADIOBUTTON_INDEX, checkedIndex)
             .apply()
 
-        if (checkedRadioButton == binding.radioButtonLightTheme) {
-            sharedPreferences.edit().putString(KEY_THEME, KEY_LIGHT_THEME).apply()
-        } else if (checkedRadioButton == binding.radioButtonDarkTheme) {
-            sharedPreferences.edit().putString(KEY_THEME, ThemeSettings.KEY_DARK_THEME).apply()
+        when (checkedRadioButton) {
+            binding.radioButtonLightTheme -> setAppTheme(KEY_LIGHT_THEME)
+            binding.radioButtonDarkTheme -> setAppTheme(KEY_DARK_THEME)
+            binding.radioButtonSystemTheme -> setAppTheme(KEY_SYSTEM_THEME)
         }
+    }
+
+    private fun setAppTheme(selectedTheme: String) {
+        sharedPreferences.edit().putString(KEY_THEME, selectedTheme).apply()
     }
 
     private fun loadSavedPreferences() {
