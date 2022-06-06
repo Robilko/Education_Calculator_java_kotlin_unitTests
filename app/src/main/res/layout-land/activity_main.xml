@@ -16,15 +16,12 @@
             <TextView
                 android:id="@+id/expression"
                 style="@style/display_land"
-                android:layout_width="wrap_content"
-                android:textStyle="italic"
-                tools:ignore="NestedWeights"
-                tools:text = "90000008+1="/>
+                tools:text = "90000009+1="/>
 
             <TextView
                 android:id="@+id/result"
                 style="@style/display_land"
-                tools:text = "90000009"/>
+                tools:text = "9000009"/>
         </LinearLayout>
 
         <LinearLayout

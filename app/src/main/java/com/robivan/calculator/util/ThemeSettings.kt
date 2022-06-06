@@ -20,12 +20,8 @@ internal fun setApplicationTheme(context: Context) {
     context.getSharedPreferences(ThemeSettings.PREF_NAME, AppCompatActivity.MODE_PRIVATE)
         .getString(ThemeSettings.KEY_THEME, null)?.let { themeValue ->
             when (themeValue) {
-                KEY_DARK_THEME -> AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_YES
-                )
-                KEY_LIGHT_THEME -> AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_NO
-                )
+                KEY_DARK_THEME -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                KEY_LIGHT_THEME -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 KEY_SYSTEM_THEME -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
         }

@@ -1,35 +1,35 @@
 <resources>
     <string name="app_name">Calculator</string>
-    <string name="one">1</string>
-    <string name="two">2</string>
-    <string name="three">3</string>
-    <string name="four">4</string>
-    <string name="five">5</string>
-    <string name="six">6</string>
-    <string name="seven">7</string>
-    <string name="eight">8</string>
-    <string name="nine">9</string>
-    <string name="zero">0</string>
-    <string name="double_zero">00</string>
+    <string name="one" translatable="false">1</string>
+    <string name="two" translatable="false">2</string>
+    <string name="three" translatable="false">3</string>
+    <string name="four" translatable="false">4</string>
+    <string name="five" translatable="false">5</string>
+    <string name="six" translatable="false">6</string>
+    <string name="seven" translatable="false">7</string>
+    <string name="eight" translatable="false">8</string>
+    <string name="nine" translatable="false">9</string>
+    <string name="zero" translatable="false">0</string>
+    <string name="double_zero" translatable="false">00</string>
 
-    <string name="clear">AC</string>
-    <string name="plus_minus">±</string>
-    <string name="percent">%</string>
-    <string name="dot">.</string>
-    <string name="plus">+</string>
-    <string name="minus">-</string>
-    <string name="division">÷</string>
-    <string name="multiply">×</string>
-    <string name="equals">=</string>
+    <string name="clear" translatable="false">AC</string>
+    <string name="plus_minus" translatable="false">±</string>
+    <string name="percent" translatable="false">%</string>
+    <string name="dot" translatable="false">.</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus" translatable="false">-</string>
+    <string name="division" translatable="false">÷</string>
+    <string name="multiply" translatable="false">×</string>
+    <string name="equals" translatable="false">=</string>
 
-    <string name="start_value">0</string>
-    <string name="division_by_zero">Разделить на ноль нельзя</string>
+    <string name="start_value" translatable="false">0</string>
+    <string name="division_by_zero">Division by zero is not allowed</string>
 
-    <string name="settings_head">Настройки</string>
-    <string name="theme_head">Выберите тему приложения:</string>
-    <string name="return_btn">Назад</string>
-    <string name="theme_light">Светлая тема</string>
-    <string name="theme_dark">Тёмная тема</string>
-    <string name="system_theme">Как в системе</string>
+    <string name="settings_head">Settings</string>
+    <string name="theme_head">Choose an app theme:</string>
+    <string name="return_btn">Back</string>
+    <string name="theme_light">Light theme</string>
+    <string name="theme_dark">Dark theme</string>
+    <string name="system_theme">Same as in the system</string>
 
 </resources>
