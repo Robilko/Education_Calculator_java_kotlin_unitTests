@@ -37,7 +37,7 @@
     </style>
 
     <style name="text_layout_land" parent="text_layout">
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">1.5</item>
         <item name="android:orientation">horizontal</item>
     </style>
 

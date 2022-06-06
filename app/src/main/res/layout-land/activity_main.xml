@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         style="@style/background_layout"/>
@@ -16,12 +16,12 @@
             <TextView
                 android:id="@+id/expression"
                 style="@style/display_land"
-                android:textStyle="italic"
-                tools:ignore="NestedWeights" />
+                tools:text = "90000009+1="/>
 
             <TextView
                 android:id="@+id/result"
-                style="@style/display_land"/>
+                style="@style/display_land"
+                tools:text = "9000009"/>
         </LinearLayout>
 
         <LinearLayout
@@ -38,7 +38,7 @@
                     android:layout_weight="1">
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/settings"
+                        android:id="@+id/btn_settings"
                         style="@style/settings_button"
                         />
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         style="@style/background_layout"/>
@@ -20,13 +20,15 @@
                 android:id="@+id/expression"
                 style="@style/display"
                 android:layout_weight="2"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                tools:text = "9088999"/>
 
             <TextView
                 android:id="@+id/result"
                 style="@style/display"
                 android:layout_weight="4"
-                android:gravity="bottom|end" />
+                android:gravity="bottom|end"
+                tools:text = "9088999"/>
         </LinearLayout>
 
         <LinearLayout
@@ -41,7 +43,7 @@
                     style="@style/table_row" >
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/settings"
+                        android:id="@+id/btn_settings"
                         style="@style/settings_button"
                         android:layout_weight="0.5"/>
                     <com.google.android.material.button.MaterialButton
