@@ -1,6 +1,7 @@
 package com.robivan.calculator.view
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -39,7 +40,16 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
     override fun onRestoreInstanceState(instanceState: Bundle) {
         super.onRestoreInstanceState(instanceState)
         if (instanceState.containsKey(CALC_KEY)) {
-            val calculator = instanceState.getSerializable(CALC_KEY) as CalculatorModel
+            val calculator = if (Build.VERSION.SDK_INT >= 33) {
+                instanceState.getSerializable(
+                    CALC_KEY,
+                    CalculatorModel::class.java
+                ) as CalculatorModel
+            } else {
+                @Suppress("DEPRECATION")
+                instanceState.getSerializable(CALC_KEY) as CalculatorModel
+            }
+
             mPresenter.onAttach(calculator, this)
         }
     }
@@ -74,6 +84,7 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
             }
         }
     }
+
     override fun showResult(resultValue: String) {
         binding.result.text = resultValue
     }
