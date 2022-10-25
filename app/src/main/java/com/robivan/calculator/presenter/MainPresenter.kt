@@ -41,36 +41,38 @@ class MainPresenter : MainContract.MainPresenter {
     }
 
     //Сброс значений аргументов и вычислений в модели, если предыдущее вычисление окончено
-    private fun resetForNewExpressionIfPreviousIsFinished() {
-        if (model.state == State.ResultShow) {
-            model.expression.setLength(0)
-            model.argument.setLength(0)
-            model.state = State.FirstArgInput
+    private fun resetForNewExpressionIfPreviousIsFinished() = with(model) {
+        if (state == State.ResultShow) {
+            expression.setLength(DEFAULT_VALUE_LENGTH)
+            argument.setLength(DEFAULT_VALUE_LENGTH)
+            state = State.FirstArgInput
         }
     }
 
     //Очистка значения от нуля в начале, если это цифра первого порядка в аргументе
-    private fun clearZeroEqualsArgument() {
-        if (model.argument.length == 1 && model.argument[0] == '0') {
-            model.argument.setLength(0)
+    private fun clearZeroEqualsArgument() = with(model) {
+        if (argument.length == 1 && argument[0] == '0') {
+            argument.setLength(DEFAULT_VALUE_LENGTH)
         }
     }
 
     //Обработка нажатия кнопки "00"
-    private fun onDoubleZeroButtonPressed() {
-        if (model.argument.isEmpty()) {
-            model.argument.append("0")
+    private fun onDoubleZeroButtonPressed() = with(model) {
+        if (argument.isEmpty()) {
+            argument.append(DEFAULT_ZERO_VALUE)
         } else {
-            model.argument.append("00")
+            argument.append(DOUBLE_ZERO_VALUE)
         }
     }
 
     //Обработка нажатия кнопки "."
-    private fun onDotButtonPressed() {
-        if (model.argument.isEmpty()) {
-            model.argument.append("0.")
-        } else if (!model.argument.toString().contains(".")) {
-            model.argument.append(".")
+    private fun onDotButtonPressed() = with(model) {
+        if (argument.isEmpty()) {
+            argument.append("0.")
+        } else if (!argument.toString().contains(".")) {
+            argument.append(".")
+        } else {
+            return@with
         }
     }
 
@@ -103,109 +105,112 @@ class MainPresenter : MainContract.MainPresenter {
             ButtonsIds.EQUALS -> {
                 onEqualsButtonPressed(actionId)
             }
-            else -> onPlusOrMinusOrDivisionOrMultiplyButtonsPressed(actionId)
+            else -> onStandardMathActionPressed(actionId)
         }
         showResult()
         showExpression()
     }
 
     //Обработка нажатия кнопки очистки
-    private fun onClearButtonPressed() {
-        model.argument.setLength(0)
-        model.expression.setLength(0)
-        model.state = State.ResultShow
+    private fun onClearButtonPressed() = with(model) {
+        argument.setLength(DEFAULT_VALUE_LENGTH)
+        expression.setLength(DEFAULT_VALUE_LENGTH)
+        state = State.ResultShow
         setZeroValueToArgument()
     }
 
     //Обработка нажатия кнопки "±"
-    private fun onPlusMinusButtonPressed() {
+    private fun onPlusMinusButtonPressed() = with(model) {
         val tmp = argumentToDouble() * -1
-        model.argument.setLength(0)
-        model.argument.append(doublePrime(tmp))
+        argument.setLength(0)
+        argument.append(doublePrime(tmp))
     }
 
     //Обработка нажатия кнопки очистки последнего символа
-    private fun onBackspaceButtonPressed() {
-        model.argument.deleteCharAt(model.argument.length - 1)
+    private fun onBackspaceButtonPressed() = with(model) {
+        argument.deleteCharAt(argument.length - 1)
         setDefaultValueToEmptyArgument()
     }
 
     //Обработка нажатия кнопки "%"
-    private fun onPercentButtonPressed() {
+    private fun onPercentButtonPressed() = with(model) {
         setDefaultValueToEmptyArgument()
         val tmp = argumentToDouble() / 100
-        model.argument.setLength(0)
-        model.argument.append(doublePrime(tmp))
+        argument.setLength(DEFAULT_VALUE_LENGTH)
+        argument.append(doublePrime(tmp))
     }
 
     //Обработка нажатия кнопки "="
-    private fun onEqualsButtonPressed(actionId: Int) {
-        if (model.state == State.FirstArgInput) {
-            model.firstArg = argumentToDouble()
-            model.state = State.SecondArgInput
-            model.actionSelected = ButtonsIds.EQUALS
+    private fun onEqualsButtonPressed(actionId: Int) = with(model) {
+        if (state == State.FirstArgInput) {
+            firstArg = argumentToDouble()
+            state = State.SecondArgInput
+            actionSelected = ButtonsIds.EQUALS
         }
-        if (model.state == State.SecondArgInput) {
-            model.secondArg = argumentToDouble()
-            model.state = State.ResultShow
-            model.expression.append(model.argument)
-            model.expression.append("=")
-            model.argument.setLength(0)
+        if (state == State.SecondArgInput) {
+            secondArg = argumentToDouble()
+            state = State.ResultShow
+            expression.append(argument)
+            expression.append("=")
+            argument.setLength(DEFAULT_VALUE_LENGTH)
 
-            when (model.actionSelected) {
-                ButtonsIds.PLUS -> model.argument.append(doublePrime(model.firstArg + model.secondArg))
-                ButtonsIds.MINUS -> model.argument.append(doublePrime(model.firstArg - model.secondArg))
-                ButtonsIds.MULTIPLY -> model.argument.append(doublePrime(model.firstArg * model.secondArg))
-                ButtonsIds.DIVISION -> if (model.secondArg == 0.0) {
+            when (actionSelected) {
+                ButtonsIds.PLUS -> argument.append(doublePrime(firstArg + secondArg))
+                ButtonsIds.MINUS -> argument.append(doublePrime(firstArg - secondArg))
+                ButtonsIds.MULTIPLY -> argument.append(doublePrime(firstArg * secondArg))
+                ButtonsIds.DIVISION -> if (secondArg == 0.0) {
                     view.showError()
                 } else {
-                    model.argument.append(doublePrime(model.firstArg / model.secondArg))
+                    argument.append(doublePrime(firstArg / secondArg))
                 }
-                ButtonsIds.EQUALS -> model.argument.append(doublePrime(model.firstArg))
+                ButtonsIds.EQUALS -> argument.append(doublePrime(firstArg))
             }
         }
-        onPlusOrMinusOrDivisionOrMultiplyButtonsPressed(actionId)
+        onStandardMathActionPressed(actionId)
     }
 
     //Обработка нажатия кнопок: "+", "-", "×", "÷"
-    private fun onPlusOrMinusOrDivisionOrMultiplyButtonsPressed(actionId: Int) {
+    private fun onStandardMathActionPressed(actionId: Int) {
         if (actionId == ButtonsIds.PLUS || actionId == ButtonsIds.MINUS || actionId == ButtonsIds.DIVISION || actionId == ButtonsIds.MULTIPLY) {
-            when (model.state) {
-                State.FirstArgInput -> {
-                    model.firstArg = argumentToDouble()
-                    model.state = State.SecondArgInput
-                    model.expression.append(model.argument)
-                    model.argument.setLength(0)
-                    setZeroValueToArgument()
+            with(model) {
+                when (state) {
+                    State.FirstArgInput -> {
+                        firstArg = argumentToDouble()
+                        state = State.SecondArgInput
+                        expression.append(argument)
+                        argument.setLength(DEFAULT_VALUE_LENGTH)
+                        setZeroValueToArgument()
+                    }
+                    State.SecondArgInput -> {
+                        onEqualsButtonPressed(actionId)
+                        expression.deleteCharAt(expression.length - 1)
+                    }
+                    State.ResultShow -> {
+                        firstArg = argumentToDouble()
+                        state = State.SecondArgInput
+                        expression.setLength(DEFAULT_VALUE_LENGTH)
+                        expression.append(argument)
+                        argument.setLength(DEFAULT_VALUE_LENGTH)
+                    }
                 }
-                State.SecondArgInput -> {
-                    onEqualsButtonPressed(actionId)
-                    model.expression.deleteCharAt(model.expression.length - 1)
-                }
-                State.ResultShow -> {
-                    model.firstArg = argumentToDouble()
-                    model.state = State.SecondArgInput
-                    model.expression.setLength(0)
-                    model.expression.append(model.argument)
-                    model.argument.setLength(0)
-                }
-            }
-            when (actionId) {
-                ButtonsIds.PLUS -> {
-                    model.actionSelected = ButtonsIds.PLUS
-                    model.expression.append("+")
-                }
-                ButtonsIds.MINUS -> {
-                    model.actionSelected = ButtonsIds.MINUS
-                    model.expression.append("-")
-                }
-                ButtonsIds.MULTIPLY -> {
-                    model.actionSelected = ButtonsIds.MULTIPLY
-                    model.expression.append("×")
-                }
-                ButtonsIds.DIVISION -> {
-                    model.actionSelected = ButtonsIds.DIVISION
-                    model.expression.append("÷")
+                when (actionId) {
+                    ButtonsIds.PLUS -> {
+                        actionSelected = ButtonsIds.PLUS
+                        expression.append("+")
+                    }
+                    ButtonsIds.MINUS -> {
+                        actionSelected = ButtonsIds.MINUS
+                        expression.append("-")
+                    }
+                    ButtonsIds.MULTIPLY -> {
+                        actionSelected = ButtonsIds.MULTIPLY
+                        expression.append("×")
+                    }
+                    ButtonsIds.DIVISION -> {
+                        actionSelected = ButtonsIds.DIVISION
+                        expression.append("÷")
+                    }
+                    else -> {}
                 }
             }
         }
@@ -248,5 +253,7 @@ class MainPresenter : MainContract.MainPresenter {
     companion object {
         const val ARG_MAX_LENGTH = 15
         const val DEFAULT_ZERO_VALUE = "0"
+        const val DOUBLE_ZERO_VALUE = "00"
+        const val DEFAULT_VALUE_LENGTH = 0
     }
 }
